@@ -9,16 +9,16 @@ RUN go get ./...
 
 COPY . .
 
-RUN go build -o broker ./cmd/main.go
+RUN go build -o auth ./cmd/main.go
 
 # The runtime stage
 FROM alpine:3.18
 
 WORKDIR /app
 
-COPY --from=builder /app/broker .
+COPY --from=builder /app/auth .
 
 COPY ./config /app/config
 
 # default command once container is up
-CMD [ "/app/broker" ]
+CMD [ "/app/auth" ]

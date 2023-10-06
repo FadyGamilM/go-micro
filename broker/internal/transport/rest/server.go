@@ -28,6 +28,8 @@ func InitServer(srv *http.Server) {
 		log.Println("couldn't initate a server")
 		os.Exit(1)
 	}
+
+	log.Println("[Broker-Microservice] | up and running on port : ", srv.Addr)
 }
 
 func ShutdownGracefully(server *http.Server) {

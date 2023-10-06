@@ -11,4 +11,31 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+
+  auth:
+    build:
+      context: ./../auth
+      dockerfile: ./../auth/auth-srv.dockerfile
+    restart: always
+    ports:
+      - "8001:80"
+    deploy:
+      mode: replicated
+      replicas: 1
+    depends_on:
+      - auth-db
       
+  auth-db:
+    image: 'postgres:14'
+    ports:
+      - "5432:5432"
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      POSTGRES_USER: auth
+      POSTGRES_PASSWORD: auth
+      POSTGRES_DB: authdb
+    volumes:
+      - ./db-data/authdb/:/var/lib/postgresql/data/
