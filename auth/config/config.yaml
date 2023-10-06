@@ -1,0 +1,9 @@
+postgresdb:
+  host: localhost:5432
+  user: "auth"
+  password: "auth"
+  dbname: "authdb"
+  sslmode: "disable"
+
+server:
+  port: "0.0.0.0:80"
