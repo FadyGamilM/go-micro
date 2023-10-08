@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  broker:
+  broker-srv:
     build:
       context: ./../broker
       dockerfile: ./../broker/broker-srv.dockerfile
@@ -12,7 +12,7 @@ services:
       mode: replicated
       replicas: 1
 
-  auth:
+  auth-srv:
     build:
       context: ./../auth
       dockerfile: ./../auth/auth-srv.dockerfile
@@ -23,9 +23,9 @@ services:
       mode: replicated
       replicas: 1
     depends_on:
-      - auth-db
+      - auth-db-srv
       
-  auth-db:
+  auth-db-srv:
     image: 'postgres:14'
     ports:
       - "5432:5432"
